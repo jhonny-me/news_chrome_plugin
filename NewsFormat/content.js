@@ -1,3 +1,4 @@
+let port = chrome.runtime.connect({name: "newsFormatPort"});
 document.addEventListener('mouseup', function(e) {
     let selectedText = window.getSelection().toString().trim();
     if (selectedText) {
@@ -8,11 +9,7 @@ document.addEventListener('mouseup', function(e) {
             btn.style.position = 'fixed';
             btn.style.zIndex = 9999;
             btn.addEventListener('click', function() {
-                chrome.runtime.sendMessage({action: "addToToday", text: selectedText}, function(response) {
-                    if (response && response.status === 'success') {
-                        btn.style.display = 'none';
-                    }
-                });
+                port.postMessage({action: "addToToday", text: selectedText, url: window.location.href});
             });
             document.body.appendChild(btn);
         }

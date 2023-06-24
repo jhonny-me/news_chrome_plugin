@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.get(['todayContent'], function(result) {
+        console.log("Content loaded: ", result.todayContent);
         let content = result.todayContent || '';
         let date = new Date();
         let dateString = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.' + date.getDate().toString().padStart(2, '0');
