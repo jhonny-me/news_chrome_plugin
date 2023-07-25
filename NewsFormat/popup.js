@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let lines = content.split('\n');
         for (let i = 0; i < lines.length; i++) {
             if (lines[i]) {
-                htmlContent += '<p style="text-align: left;">' + (i + 1) + '. ' + lines[i] + '</p>';
+                htmlContent += '<p style="text-align: left; font-size: 16px;">' + (i + 1) + '. ' + lines[i] + '</p>';
             }
         }
 
