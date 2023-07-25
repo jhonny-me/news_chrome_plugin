@@ -8,9 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
         let htmlContent = '<p style="color: black; font-size: 20px; font-weight: bold;">' + header + '</p>';
 
         let lines = content.split('\n');
+        let todayLines = [];
+
+        // 根据当前日期筛选出当天的文本
         for (let i = 0; i < lines.length; i++) {
-            if (lines[i]) {
-                htmlContent += '<p style="text-align: left; font-size: 16px;">' + (i + 1) + '. ' + lines[i] + '</p>';
+            if (lines[i] === dateString) {
+                todayLines = lines.slice(i + 1);
+                break;
+            }
+        }
+
+        for (let i = 0; i < todayLines.length; i++) {
+            if (todayLines[i]) {
+                htmlContent += '<p style="text-align: left; font-size: 16px;">' + (i + 1) + '. ' + todayLines[i] + '</p>';
             }
         }
 

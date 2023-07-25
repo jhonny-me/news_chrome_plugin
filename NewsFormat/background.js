@@ -7,9 +7,16 @@ chrome.contextMenus.create({
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
     if (info.menuItemId === "addToToday") {
         let textToAdd = `${info.selectionText}【${new URL(tab.url).hostname}】\n`;
+        let date = new Date();
+        let dateString = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.' + date.getDate().toString().padStart(2, '0');
         chrome.storage.local.get(['todayContent'], function(result) {
             let content = result.todayContent || '';
-            content += textToAdd;
+            if (content.includes(dateString)) {
+                content += textToAdd;    
+            } else {
+                content += dateString + '\n' + textToAdd;
+            }
+
             chrome.storage.local.set({todayContent: content}, function() {
                 console.log("Content saved: ", content);
                 if (chrome.runtime.lastError) {
